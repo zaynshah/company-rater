@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Company from "./CompanyComponent/Company.js";
+import companyData from "./company_data.js";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  function getCompanyComponents() {
+    const components = companyData.map((company) => {
+      return <Company company={company} />;
+    });
+
+    return components;
+  }
+
+  return <div className="App">{getCompanyComponents()}</div>;
 }
 
 export default App;
