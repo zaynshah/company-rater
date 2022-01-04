@@ -6,6 +6,7 @@ class Company extends React.Component {
     this.state = {
       upvote: 0,
       downvote: 0,
+      SuperLike: 0,
     };
   }
 
@@ -17,6 +18,11 @@ class Company extends React.Component {
   onDownvote() {
     let newDownvote = this.state.downvote + 1;
     this.setState({ downvote: newDownvote });
+  }
+
+  onSuperLike() {
+    let newSuperLike = this.state.SuperLike + 1;
+    this.setState({ SuperLike: newSuperLike });
   }
 
   render() {
@@ -39,8 +45,28 @@ class Company extends React.Component {
         >
           Downvote
         </button>
-        <p>Upvotes: {this.state.upvote}</p>
+        <button
+          onClick={() => {
+            this.onSuperLike();
+          }}
+        >
+          SuperLike
+        </button>
+        <p>Superlike: {this.state.SuperLike}</p>
+        <p>
+          Upvotes:{" "}
+          {this.state.upvote * this.state.SuperLike || this.state.upvote}
+        </p>
         <p>Downvotes: {this.state.downvote}</p>
+        <p>
+          Percentage of upvotes:{" "}
+          {((this.state.upvote * this.state.SuperLike) /
+            (this.state.upvote * this.state.SuperLike + this.state.downvote)) *
+            100 ||
+            (this.state.upvote / (this.state.upvote + this.state.downvote)) *
+              100}
+          %
+        </p>
       </div>
     );
   }
